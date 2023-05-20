@@ -2,6 +2,7 @@ package com.example.firstspringapp;
 
 import com.example.firstspringapp.console.Header;
 import com.example.firstspringapp.console.Menu;
+import com.example.firstspringapp.controller.ScannerController;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,13 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FirstSpringAppApplication implements CommandLineRunner {
 
 
-    private final Menu menu; // class dependency
-    private final Header header;
+    private final ScannerController controller;
 
     // dependency injection with constructor - recommended!
-    public FirstSpringAppApplication(Menu menu, Header header) {
-        this.menu = menu;
-        this.header = header;
+    public FirstSpringAppApplication(ScannerController controller) {
+
+        this.controller = controller;
     }
     public static void main(String[] args) {
 
@@ -25,11 +25,6 @@ public class FirstSpringAppApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        header.print();
-        if(menu != null) {
-            menu.print();
-        } else {
-            System.out.println("Menu not found!");
-        }
+       controller.mainLoopRun();
     }
 }
